@@ -1,0 +1,8 @@
+{
+  "carpet.category.as_addition": "AS的附加包",
+
+  "carpet.rule.exampleRule.name": "示例规则",
+  "carpet.rule.exampleRule.desc": "开启后，在服务器与维度加载完成时向日志输出一条提示。",
+  "carpet.rule.exampleRule.extra.0": "默认关闭，不改变任何原版行为。",
+  "carpet.rule.exampleRule.extra.1": "修改后需重新进入世界或重启服务器后才会在加载阶段触发日志。"
+}

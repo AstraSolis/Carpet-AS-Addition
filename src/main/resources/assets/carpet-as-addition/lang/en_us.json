@@ -1,0 +1,8 @@
+{
+  "carpet.category.as_addition": "AS Addition Pack",
+
+  "carpet.rule.exampleRule.name": "Example Rule",
+  "carpet.rule.exampleRule.desc": "When enabled, logs a message after the server and all dimensions have finished loading.",
+  "carpet.rule.exampleRule.extra.0": "Off by default; does not change any vanilla behavior.",
+  "carpet.rule.exampleRule.extra.1": "After toggling, re-enter the world or restart the server for the load-time log to appear."
+}

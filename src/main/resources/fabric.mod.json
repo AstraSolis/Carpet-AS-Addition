@@ -1,0 +1,27 @@
+{
+	"schemaVersion": 1,
+	"id": "carpet-as-addition",
+	"version": "${version}",
+	"name": "Carpet AS Addition",
+	"description": "Carpet mod 的扩展，提供额外规则与功能。",
+	"authors": [
+		"AstraSolis"
+	],
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"carpet.as.addition.CarpetASAddition"
+		],
+		"client": [
+			"carpet.as.addition.client.CarpetASAdditionClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.2",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*",
+		"carpet": "*"
+	}
+}
