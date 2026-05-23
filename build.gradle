@@ -6,6 +6,16 @@ plugins {
 version = project.mod_version
 group = project.maven_group
 
+def releaseJarBaseName = "Carpet-AS-Addition-${project.mod_version}-${project.minecraft_version}"
+
+remapJar {
+	archiveFileName.set("${releaseJarBaseName}.jar")
+}
+
+remapSourcesJar {
+	archiveFileName.set("${releaseJarBaseName}-sources.jar")
+}
+
 repositories {
 	maven {
 		name = 'Modrinth'
