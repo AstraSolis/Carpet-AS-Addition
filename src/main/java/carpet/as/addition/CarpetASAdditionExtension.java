@@ -19,7 +19,17 @@ import java.util.Map;
  */
 public class CarpetASAdditionExtension implements CarpetExtension {
 
-	private static volatile boolean fakePlayerSyncInitialized;
+	/**
+	 * JVM 生命周期级别的幂等保护标记。
+	 * <p>
+	 * {@link SettingsManager#registerGlobalRuleObserver} 向全局静态列表追加回调，
+	 * 若在同一 JVM 内多次调用（例如开发环境 {@code runServer} 重启服务器但不退出进程），
+	 * 会导致回调重复注册，规则变化时广播多次。此标记确保全局观察者仅注册一次。
+	 * <p>
+	 * <b>开发环境热重载注意：</b>若使用字节码替换类工具（如 Hotswap Agent），
+	 * 此标记可能不会随类定义更新而重置，需完整重启 JVM 进程才能重新注册。
+	 */
+	private static volatile boolean globalObserverRegistered;
 
 	/**
 	 * 返回 {@code null}：不注册独立的 /carpet-as-addition 设置界面，规则并入主 Carpet。
@@ -36,9 +46,10 @@ public class CarpetASAdditionExtension implements CarpetExtension {
 	@Override
 	public void onGameStarted() {
 		CarpetServer.settingsManager.parseSettingsClass(CarpetASAdditionSettings.class);
-		if (!fakePlayerSyncInitialized) {
-			fakePlayerSyncInitialized = true;
-			FakePlayerTracker.register();
+		// FakePlayerTracker.register() 内部有自己的幂等守卫，可直接调用
+		FakePlayerTracker.register();
+		if (!globalObserverRegistered) {
+			globalObserverRegistered = true;
 			// 监听任意规则变化，当 fakePlayerNametag 被切换时重新广播假人列表
 			SettingsManager.registerGlobalRuleObserver((source, rule, value) -> {
 				if ("fakePlayerNametag".equals(rule.name())) {

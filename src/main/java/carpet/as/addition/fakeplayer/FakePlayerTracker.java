@@ -20,6 +20,15 @@ import java.util.stream.Collectors;
  */
 public final class FakePlayerTracker {
 
+	/**
+	 * JVM 生命周期级别的幂等保护标记。
+	 * <p>
+	 * Fabric 事件总线（{@link ServerPlayConnectionEvents}）持有的是 JVM 全局静态事件对象，
+	 * 在同一 JVM 内跨服务器重启时监听器依然有效，无需重复注册。
+	 * <p>
+	 * <b>开发环境热重载注意：</b>若使用字节码替换工具，此标记可能不随类定义更新而重置，
+	 * 需完整重启 JVM 进程才能重新注册事件监听器。
+	 */
     private static volatile boolean registered;
 
     private FakePlayerTracker() {}
