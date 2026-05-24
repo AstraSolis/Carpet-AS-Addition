@@ -1,6 +1,7 @@
 package carpet.as.addition;
 
 import carpet.CarpetServer;
+import carpet.as.addition.network.FakePlayerSyncPayload;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,8 @@ public class CarpetASAddition implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		// PayloadTypeRegistry 注册必须在初始化阶段完成，不能延迟到 onGameStarted
+		FakePlayerSyncPayload.register();
 		// 必须通过 manageExtension 注册，不要用 Mixin 注册扩展
 		CarpetServer.manageExtension(new CarpetASAdditionExtension());
 		LOGGER.info("已注册 Carpet 扩展");

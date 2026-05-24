@@ -4,5 +4,10 @@
   "carpet.rule.exampleRule.name": "Example Rule",
   "carpet.rule.exampleRule.desc": "When enabled, logs a message after the server and all dimensions have finished loading.",
   "carpet.rule.exampleRule.extra.0": "Off by default; does not change any vanilla behavior.",
-  "carpet.rule.exampleRule.extra.1": "After toggling, re-enter the world or restart the server for the load-time log to appear."
+  "carpet.rule.exampleRule.extra.1": "After toggling, re-enter the world or restart the server for the load-time log to appear.",
+
+  "carpet.rule.fakePlayerNametag.name": "Fake Player Nametag Color",
+  "carpet.rule.fakePlayerNametag.desc": "When enabled, fake player nametag backgrounds, tab list row backgrounds, and command suggestion row backgrounds turn green instead of the default dark color, distinguishing them from real players without altering the name text.",
+  "carpet.rule.fakePlayerNametag.extra.0": "Requires the mod installed on the client side to see the color change.",
+  "carpet.rule.fakePlayerNametag.extra.1": "Takes effect immediately for all online players when toggled."
 }

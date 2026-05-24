@@ -17,6 +17,12 @@
 			"carpet.as.addition.client.CarpetASAdditionClient"
 		]
 	},
+	"mixins": [
+		{
+			"config": "carpet-as-addition.client.mixins.json",
+			"environment": "client"
+		}
+	],
 	"depends": {
 		"fabricloader": ">=0.19.2",
 		"minecraft": "~1.21.11",

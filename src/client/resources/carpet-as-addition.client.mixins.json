@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "carpet.as.addition.client.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "AvatarRendererMixin",
+    "CommandSuggestionsMixin",
+    "NameTagStorageMixin",
+    "PlayerTabOverlayMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

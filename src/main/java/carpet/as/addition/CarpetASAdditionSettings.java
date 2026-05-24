@@ -20,4 +20,11 @@ public class CarpetASAdditionSettings {
 	/** 示例规则：默认关闭。描述见 en_us.json / zh_cn.json */
 	@Rule(categories = {CATEGORY})
 	public static boolean exampleRule = false;
+
+	/**
+	 * 假人名称标签背景颜色标记：开启后假人名称标签背景变为绿色，与正常玩家区分。
+	 * 客户端需同时安装本模组才能看到效果。
+	 */
+	@Rule(categories = {CATEGORY})
+	public static boolean fakePlayerNametag = false;
 }

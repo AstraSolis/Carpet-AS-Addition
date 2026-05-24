@@ -1,13 +1,22 @@
 package carpet.as.addition.client;
 
+import carpet.as.addition.client.fakeplayer.FakePlayerCache;
+import carpet.as.addition.network.FakePlayerSyncPayload;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
 /**
- * 客户端入口。Carpet 附属 mod 多数逻辑在服务端，此处预留给按键、渲染等客户端功能。
+ * 客户端入口。注册客户端网络包处理器。
  */
 public class CarpetASAdditionClient implements ClientModInitializer {
 	@Override
+	@SuppressWarnings("resource")
 	public void onInitializeClient() {
-		// 暂无客户端逻辑
+		ClientPlayNetworking.registerGlobalReceiver(
+				FakePlayerSyncPayload.TYPE,
+				(payload, context) -> context.client().execute(
+						() -> FakePlayerCache.update(payload.fakePlayerUuids())
+				)
+		);
 	}
 }

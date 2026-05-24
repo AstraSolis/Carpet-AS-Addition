@@ -5,6 +5,7 @@ package carpet.as.addition;
  * <p>
  * 新增规则时在此类补充常量，并在 {@code assets/carpet-as-addition/lang/} 下同步填写中英文。
  */
+@SuppressWarnings("unused")
 public final class CarpetASAdditionTranslations {
 	private CarpetASAdditionTranslations() {
 	}
@@ -20,6 +21,17 @@ public final class CarpetASAdditionTranslations {
 		public static final String EXTRA_1 = "carpet.rule.exampleRule.extra.1";
 
 		private ExampleRule() {
+		}
+	}
+
+	/** 规则 {@code fakePlayerNametag} 的翻译键前缀 */
+	public static final class FakePlayerNametag {
+		public static final String NAME = "carpet.rule.fakePlayerNametag.name";
+		public static final String DESC = "carpet.rule.fakePlayerNametag.desc";
+		public static final String EXTRA_0 = "carpet.rule.fakePlayerNametag.extra.0";
+		public static final String EXTRA_1 = "carpet.rule.fakePlayerNametag.extra.1";
+
+		private FakePlayerNametag() {
 		}
 	}
 }
