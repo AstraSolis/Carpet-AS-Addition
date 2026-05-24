@@ -1,11 +1,6 @@
 {
   "carpet.category.as_addition": "AS的附加包",
 
-  "carpet.rule.exampleRule.name": "示例规则",
-  "carpet.rule.exampleRule.desc": "开启后，在服务器与维度加载完成时向日志输出一条提示。",
-  "carpet.rule.exampleRule.extra.0": "默认关闭，不改变任何原版行为。",
-  "carpet.rule.exampleRule.extra.1": "修改后需重新进入世界或重启服务器后才会在加载阶段触发日志。",
-
   "carpet.rule.fakePlayerNametag.name": "假人名称标签颜色",
   "carpet.rule.fakePlayerNametag.desc": "开启后，假人头顶名称标签、Tab 玩家列表行与命令补全建议行的背景均变为绿色，与正常玩家的深色背景区分，不改变名称文本内容。",
   "carpet.rule.fakePlayerNametag.extra.0": "客户端需同时安装本模组才能看到颜色变化。",

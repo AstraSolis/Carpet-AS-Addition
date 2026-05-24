@@ -61,9 +61,6 @@ public class CarpetASAdditionExtension implements CarpetExtension {
 
 	@Override
 	public void onServerLoaded(MinecraftServer server) {
-		if (CarpetASAdditionSettings.exampleRule) {
-			CarpetASAddition.LOGGER.info("exampleRule 已开启");
-		}
 		// 世界加载完成后向已在线玩家同步假人列表（规则已开启且假人先于客户端重连时）
 		if (CarpetASAdditionSettings.fakePlayerNametag) {
 			FakePlayerTracker.broadcastFakePlayerList(server);
