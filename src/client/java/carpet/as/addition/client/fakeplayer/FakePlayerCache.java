@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 /**
  * 客户端假人 UUID 缓存。
@@ -28,12 +29,23 @@ public final class FakePlayerCache {
     private static final AtomicReference<Set<UUID>> FAKE_PLAYER_UUIDS =
             new AtomicReference<>(Collections.emptySet());
 
+    /**
+     * 假人名称缓存，在 {@link #update} 时从在线玩家列表中同步构建。
+     * 用于 {@link #isFakePlayerByName} 的 O(1) 查询，避免每帧遍历。
+     */
+    private static final AtomicReference<Set<String>> FAKE_PLAYER_NAMES =
+            new AtomicReference<>(Collections.emptySet());
+
     /** 当前渲染线程是否正在渲染假人名称标签（ThreadLocal 标记）。 */
     private static final ThreadLocal<Boolean> RENDERING_FAKE_PLAYER = ThreadLocal.withInitial(() -> false);
 
-    /** 由网络包处理器调用，更新本地假人 UUID 缓存。 */
+    /**
+     * 由网络包处理器调用，更新本地假人 UUID 缓存，并同步重建名称缓存。
+     * 名称缓存的重建仅在数据变更时触发（网络包事件），不在每帧渲染时执行。
+     */
     public static void update(Set<UUID> uuids) {
         FAKE_PLAYER_UUIDS.set(Collections.unmodifiableSet(uuids));
+        FAKE_PLAYER_NAMES.set(buildNameSet(uuids));
     }
 
     /** 返回当前缓存的假人 UUID 集合快照（不可变）。 */
@@ -47,16 +59,21 @@ public final class FakePlayerCache {
     }
 
     /**
-     * 通过玩家名称判断是否为假人。
-     * 在客户端玩家列表中查找匹配名称的 UUID，再与假人缓存比对。
-     * 用于命令补全等只有名称字符串、没有 UUID 的场景。
+     * 通过玩家名称判断是否为假人，O(1) 查询名称缓存。
+     * 名称缓存在 {@link #update} 时与 UUID 集合同步重建。
      */
     public static boolean isFakePlayerByName(String name) {
+        return FAKE_PLAYER_NAMES.get().contains(name);
+    }
+
+    private static Set<String> buildNameSet(Set<UUID> uuids) {
+        if (uuids.isEmpty()) return Collections.emptySet();
         Minecraft mc = Minecraft.getInstance();
-        if (mc.player == null) return false;
+        if (mc.player == null) return Collections.emptySet();
         return mc.player.connection.getOnlinePlayers().stream()
-                .filter(info -> name.equals(info.getProfile().name()))
-                .anyMatch(info -> isFakePlayer(info.getProfile().id()));
+                .filter(info -> uuids.contains(info.getProfile().id()))
+                .map(info -> info.getProfile().name())
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     /** 在 submitNameTag 开始前标记：当前正在处理假人名称标签。 */
