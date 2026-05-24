@@ -40,11 +40,20 @@ public abstract class PlayerTabOverlayMixin {
     @Unique
     private static final int FAKE_PLAYER_TAB_BG_COLOR = FakePlayerCache.NAMETAG_BG_COLOR;
 
-    /** 按渲染顺序记录每个玩家是否为假人，在每次 render 开始时重置。 */
+    /**
+     * 按渲染顺序记录每个玩家是否为假人，在每次 render 开始时重置。
+     * 元素由第一个 for-each 循环（getNameForDisplay redirect）填入，
+     * 由第二个 for 循环（fill redirect）按索引消费。
+     */
     @Unique
     private final List<Boolean> fakePlayerTabFlags = new ArrayList<>();
 
-    /** 当前渲染行对应的假人标记索引。 */
+    /**
+     * 当前渲染行对应的假人标记消费索引。
+     * 场景 D 防御：两个循环之间若玩家列表发生变化（高频进出时偶发），
+     * 该索引可能超出 fakePlayerTabFlags 的大小；超出时降级为原始颜色，
+     * 不崩溃，仅当帧部分行颜色不正确，下一帧自动恢复。
+     */
     @Unique
     private int fakePlayerRowIndex = 0;
 
@@ -78,6 +87,9 @@ public abstract class PlayerTabOverlayMixin {
      * 玩家行背景填充高度恒为 8px（{@code fill(z, aa, z+n, aa+8, w)}），
      * 其余 fill（header/footer/外框）高度均为 9 的倍数，可以可靠区分。
      * 对假人行替换为绿色背景色。
+     *
+     * <p>若行索引超出标记列表（场景 D：两循环间列表变化），直接使用原始颜色。
+     * MC 1.21.1 玩家行高固定为 8px。
      */
     @Redirect(
             method = "render",
@@ -87,7 +99,10 @@ public abstract class PlayerTabOverlayMixin {
             )
     )
     private void redirectRowFill(GuiGraphics guiGraphics, int x1, int y1, int x2, int y2, int color) {
-        if (y2 - y1 == 8 && fakePlayerRowIndex < fakePlayerTabFlags.size()) {
+        boolean isPlayerRow = y2 - y1 == 8;
+        boolean hasFlagForRow = fakePlayerRowIndex < fakePlayerTabFlags.size();
+
+        if (isPlayerRow && hasFlagForRow) {
             boolean isFake = fakePlayerTabFlags.get(fakePlayerRowIndex++);
             guiGraphics.fill(x1, y1, x2, y2, isFake ? FAKE_PLAYER_TAB_BG_COLOR : color);
         } else {

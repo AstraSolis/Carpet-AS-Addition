@@ -36,6 +36,11 @@ public final class FakePlayerCache {
         FAKE_PLAYER_UUIDS.set(Collections.unmodifiableSet(uuids));
     }
 
+    /** 返回当前缓存的假人 UUID 集合快照（不可变）。 */
+    public static Set<UUID> getAll() {
+        return FAKE_PLAYER_UUIDS.get();
+    }
+
     /** 判断指定 UUID 是否属于假人。 */
     public static boolean isFakePlayer(UUID uuid) {
         return FAKE_PLAYER_UUIDS.get().contains(uuid);
