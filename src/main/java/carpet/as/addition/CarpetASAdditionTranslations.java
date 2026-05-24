@@ -34,4 +34,15 @@ public final class CarpetASAdditionTranslations {
 		private FakePlayerNametag() {
 		}
 	}
+
+	/** 规则 {@code fakePlayerSleepIgnore} 的翻译键前缀 */
+	public static final class FakePlayerSleepIgnore {
+		public static final String NAME = "carpet.rule.fakePlayerSleepIgnore.name";
+		public static final String DESC = "carpet.rule.fakePlayerSleepIgnore.desc";
+		public static final String EXTRA_0 = "carpet.rule.fakePlayerSleepIgnore.extra.0";
+		public static final String EXTRA_1 = "carpet.rule.fakePlayerSleepIgnore.extra.1";
+
+		private FakePlayerSleepIgnore() {
+		}
+	}
 }

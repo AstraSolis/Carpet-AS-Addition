@@ -9,5 +9,10 @@
   "carpet.rule.fakePlayerNametag.name": "假人名称标签颜色",
   "carpet.rule.fakePlayerNametag.desc": "开启后，假人头顶名称标签、Tab 玩家列表行与命令补全建议行的背景均变为绿色，与正常玩家的深色背景区分，不改变名称文本内容。",
   "carpet.rule.fakePlayerNametag.extra.0": "客户端需同时安装本模组才能看到颜色变化。",
-  "carpet.rule.fakePlayerNametag.extra.1": "规则切换后立即对已在线的玩家生效。"
+  "carpet.rule.fakePlayerNametag.extra.1": "规则切换后立即对已在线的玩家生效。",
+
+  "carpet.rule.fakePlayerSleepIgnore.name": "假人睡眠忽略",
+  "carpet.rule.fakePlayerSleepIgnore.desc": "开启后，服务端在判断「是否所有玩家都已入睡以跳过夜晚」时将忽略所有假人，仅统计真实玩家，使真实玩家全部入睡即可正常跳过夜晚。",
+  "carpet.rule.fakePlayerSleepIgnore.extra.0": "纯服务端规则，无需客户端安装本模组。",
+  "carpet.rule.fakePlayerSleepIgnore.extra.1": "规则切换后立即生效，无需玩家重新登录。"
 }

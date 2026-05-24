@@ -18,6 +18,7 @@
 		]
 	},
 	"mixins": [
+		"carpet-as-addition.mixins.json",
 		{
 			"config": "carpet-as-addition.client.mixins.json",
 			"environment": "client"

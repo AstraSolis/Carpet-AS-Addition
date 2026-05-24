@@ -9,5 +9,10 @@
   "carpet.rule.fakePlayerNametag.name": "Fake Player Nametag Color",
   "carpet.rule.fakePlayerNametag.desc": "When enabled, fake player nametag backgrounds, tab list row backgrounds, and command suggestion row backgrounds turn green instead of the default dark color, distinguishing them from real players without altering the name text.",
   "carpet.rule.fakePlayerNametag.extra.0": "Requires the mod installed on the client side to see the color change.",
-  "carpet.rule.fakePlayerNametag.extra.1": "Takes effect immediately for all online players when toggled."
+  "carpet.rule.fakePlayerNametag.extra.1": "Takes effect immediately for all online players when toggled.",
+
+  "carpet.rule.fakePlayerSleepIgnore.name": "Fake Player Sleep Ignore",
+  "carpet.rule.fakePlayerSleepIgnore.desc": "When enabled, fake players are excluded from the server's sleep count check. Only real players are considered when determining whether enough players are sleeping to skip the night.",
+  "carpet.rule.fakePlayerSleepIgnore.extra.0": "Server-side only; no client-side mod installation required.",
+  "carpet.rule.fakePlayerSleepIgnore.extra.1": "Takes effect immediately when toggled; no reconnection required."
 }

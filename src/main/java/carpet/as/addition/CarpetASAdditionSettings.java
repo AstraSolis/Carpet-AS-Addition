@@ -27,4 +27,11 @@ public class CarpetASAdditionSettings {
 	 */
 	@Rule(categories = {CATEGORY})
 	public static boolean fakePlayerNametag = false;
+
+	/**
+	 * 假人睡眠忽略：开启后服务端在判断"是否所有玩家都已入睡以跳过夜晚"时忽略假人，
+	 * 只统计真实玩家，使所有真实玩家入睡即可跳过夜晚。
+	 */
+	@Rule(categories = {CATEGORY})
+	public static boolean fakePlayerSleepIgnore = false;
 }
