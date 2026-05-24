@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import java.util.Collections;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -30,20 +31,38 @@ public final class FakePlayerCache {
             new AtomicReference<>(Collections.emptySet());
 
     /**
-     * 假人名称缓存，在 {@link #update} 时从在线玩家列表中同步构建。
+     * 假人名称缓存，在 {@link #update} 和 {@link #updateUuids} 时从在线玩家列表中同步构建。
      * 用于 {@link #isFakePlayerByName} 的 O(1) 查询，避免每帧遍历。
      */
     private static final AtomicReference<Set<String>> FAKE_PLAYER_NAMES =
             new AtomicReference<>(Collections.emptySet());
 
+    /** 各 UI 位置的独立启用标志，由服务端规则同步。 */
+    private static final AtomicBoolean HEAD_ENABLED = new AtomicBoolean(false);
+    private static final AtomicBoolean TAB_ENABLED = new AtomicBoolean(false);
+    private static final AtomicBoolean COMMAND_ENABLED = new AtomicBoolean(false);
+
     /** 当前渲染线程是否正在渲染假人名称标签（ThreadLocal 标记）。 */
     private static final ThreadLocal<Boolean> RENDERING_FAKE_PLAYER = ThreadLocal.withInitial(() -> false);
 
     /**
-     * 由网络包处理器调用，更新本地假人 UUID 缓存，并同步重建名称缓存。
+     * 由网络包处理器调用，更新本地假人 UUID 缓存及各 UI 位置的启用状态，并同步重建名称缓存。
      * 名称缓存的重建仅在数据变更时触发（网络包事件），不在每帧渲染时执行。
      */
-    public static void update(Set<UUID> uuids) {
+    public static void update(Set<UUID> uuids, boolean headEnabled, boolean tabEnabled, boolean commandEnabled) {
+        FAKE_PLAYER_UUIDS.set(Collections.unmodifiableSet(uuids));
+        FAKE_PLAYER_NAMES.set(buildNameSet(uuids));
+        HEAD_ENABLED.set(headEnabled);
+        TAB_ENABLED.set(tabEnabled);
+        COMMAND_ENABLED.set(commandEnabled);
+    }
+
+    /**
+     * 仅更新假人 UUID 缓存，不改变各 UI 位置的启用标志。
+     * 供 {@link carpet.as.addition.client.mixin.ClientPacketListenerMixin} 在玩家离开时
+     * 从缓存中剔除 UUID，避免等待下一次服务端同步包。
+     */
+    public static void updateUuids(Set<UUID> uuids) {
         FAKE_PLAYER_UUIDS.set(Collections.unmodifiableSet(uuids));
         FAKE_PLAYER_NAMES.set(buildNameSet(uuids));
     }
@@ -89,5 +108,20 @@ public final class FakePlayerCache {
     /** 检查当前渲染上下文是否为假人名称标签。 */
     public static boolean isFakePlaying() {
         return RENDERING_FAKE_PLAYER.get();
+    }
+
+    /** 头顶名称标签颜色标记是否已由服务端启用。 */
+    public static boolean isHeadEnabled() {
+        return HEAD_ENABLED.get();
+    }
+
+    /** Tab 玩家列表颜色标记是否已由服务端启用。 */
+    public static boolean isTabEnabled() {
+        return TAB_ENABLED.get();
+    }
+
+    /** 命令补全建议行颜色标记是否已由服务端启用。 */
+    public static boolean isCommandEnabled() {
+        return COMMAND_ENABLED.get();
     }
 }

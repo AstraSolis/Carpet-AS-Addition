@@ -40,6 +40,7 @@ public abstract class AvatarRendererMixin {
             CallbackInfo ci
     ) {
         FakePlayerCache.clearFakePlaying();
+        if (!FakePlayerCache.isHeadEnabled()) return;
         if (Minecraft.getInstance().level == null) return;
         Entity entity = Minecraft.getInstance().level.getEntity(state.id);
         if (entity instanceof Player player && FakePlayerCache.isFakePlayer(player.getUUID())) {

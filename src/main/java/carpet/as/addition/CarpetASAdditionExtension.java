@@ -50,9 +50,12 @@ public class CarpetASAdditionExtension implements CarpetExtension {
 		FakePlayerTracker.register();
 		if (!globalObserverRegistered) {
 			globalObserverRegistered = true;
-			// 监听任意规则变化，当 fakePlayerNametag 被切换时重新广播假人列表
+			// 监听任意规则变化，当三个假人名称标签子规则被切换时重新广播假人列表
 			SettingsManager.registerGlobalRuleObserver((source, rule, value) -> {
-				if ("fakePlayerNametag".equals(rule.name())) {
+				String name = rule.name();
+				if ("fakePlayerNametagHead".equals(name)
+						|| "fakePlayerNametagTab".equals(name)
+						|| "fakePlayerNametagCommand".equals(name)) {
 					FakePlayerTracker.broadcastFakePlayerList(source.getServer());
 				}
 			});
@@ -72,8 +75,10 @@ public class CarpetASAdditionExtension implements CarpetExtension {
 
 	@Override
 	public void onServerLoaded(MinecraftServer server) {
-		// 世界加载完成后向已在线玩家同步假人列表（规则已开启且假人先于客户端重连时）
-		if (CarpetASAdditionSettings.fakePlayerNametag) {
+		// 世界加载完成后向已在线玩家同步假人列表（任一子规则已开启且假人先于客户端重连时）
+		if (CarpetASAdditionSettings.fakePlayerNametagHead
+				|| CarpetASAdditionSettings.fakePlayerNametagTab
+				|| CarpetASAdditionSettings.fakePlayerNametagCommand) {
 			FakePlayerTracker.broadcastFakePlayerList(server);
 		}
 	}

@@ -54,7 +54,7 @@ public abstract class CommandSuggestionsMixin {
             GuiGraphics guiGraphics, int x1, int y1, int x2, int y2, int color,
             @Local(name = "suggestion") Suggestion suggestion
     ) {
-        if (FakePlayerCache.isFakePlayerByName(suggestion.getText())) {
+        if (FakePlayerCache.isCommandEnabled() && FakePlayerCache.isFakePlayerByName(suggestion.getText())) {
             guiGraphics.fill(x1, y1, x2, y2, FakePlayerCache.NAMETAG_BG_COLOR);
             return;
         }

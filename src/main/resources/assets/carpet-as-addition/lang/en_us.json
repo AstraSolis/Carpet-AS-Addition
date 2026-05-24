@@ -1,10 +1,20 @@
 {
   "carpet.category.as_addition": "AS Addition Pack",
 
-  "carpet.rule.fakePlayerNametag.name": "Fake Player Nametag Color",
-  "carpet.rule.fakePlayerNametag.desc": "When enabled, fake player nametag backgrounds, tab list row backgrounds, and command suggestion row backgrounds turn green instead of the default dark color, distinguishing them from real players without altering the name text.",
-  "carpet.rule.fakePlayerNametag.extra.0": "Requires the mod installed on the client side to see the color change.",
-  "carpet.rule.fakePlayerNametag.extra.1": "Takes effect immediately for all online players when toggled.",
+  "carpet.rule.fakePlayerNametagHead.name": "Fake Player Nametag Color (Head)",
+  "carpet.rule.fakePlayerNametagHead.desc": "When enabled, the nametag background above fake players' heads turns green, distinguishing them from real players without altering the name text.",
+  "carpet.rule.fakePlayerNametagHead.extra.0": "Requires the mod installed on the client side to see the color change.",
+  "carpet.rule.fakePlayerNametagHead.extra.1": "Takes effect immediately for all online players when toggled.",
+
+  "carpet.rule.fakePlayerNametagTab.name": "Fake Player Nametag Color (Tab List)",
+  "carpet.rule.fakePlayerNametagTab.desc": "When enabled, fake player row backgrounds in the tab player list turn green, distinguishing them from real players without altering the name text.",
+  "carpet.rule.fakePlayerNametagTab.extra.0": "Requires the mod installed on the client side to see the color change.",
+  "carpet.rule.fakePlayerNametagTab.extra.1": "Takes effect immediately for all online players when toggled.",
+
+  "carpet.rule.fakePlayerNametagCommand.name": "Fake Player Nametag Color (Command Suggestions)",
+  "carpet.rule.fakePlayerNametagCommand.desc": "When enabled, fake player name row backgrounds in the command suggestion list turn green, distinguishing them from real players without altering the name text.",
+  "carpet.rule.fakePlayerNametagCommand.extra.0": "Requires the mod installed on the client side to see the color change.",
+  "carpet.rule.fakePlayerNametagCommand.extra.1": "Takes effect immediately for all online players when toggled.",
 
   "carpet.rule.fakePlayerSleepIgnore.name": "Fake Player Sleep Ignore",
   "carpet.rule.fakePlayerSleepIgnore.desc": "When enabled, fake players are excluded from the server's sleep count check. Only real players are considered when determining whether enough players are sleeping to skip the night.",

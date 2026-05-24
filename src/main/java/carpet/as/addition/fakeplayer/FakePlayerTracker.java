@@ -61,11 +61,11 @@ public final class FakePlayerTracker {
     }
 
     /**
-     * 广播当前假人 UUID 集合给所有在线的真实玩家。
-     * 若规则未开启，广播空集合（清除客户端缓存）。
+     * 广播当前假人 UUID 集合及各规则启用状态给所有在线的真实玩家。
+     * 若所有子规则均未开启，广播空集合（清除客户端缓存）。
      */
     public static void broadcastFakePlayerList(MinecraftServer server) {
-        FakePlayerSyncPayload payload = new FakePlayerSyncPayload(getFakePlayerUuids(server));
+        FakePlayerSyncPayload payload = buildPayload(server);
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if (!(player instanceof EntityPlayerMPFake)) {
                 ServerPlayNetworking.send(player, payload);
@@ -74,14 +74,18 @@ public final class FakePlayerTracker {
     }
 
     private static void sendFakePlayerListTo(ServerPlayer player, MinecraftServer server) {
-        FakePlayerSyncPayload payload = new FakePlayerSyncPayload(getFakePlayerUuids(server));
-        ServerPlayNetworking.send(player, payload);
+        ServerPlayNetworking.send(player, buildPayload(server));
     }
 
-    private static Set<UUID> getFakePlayerUuids(MinecraftServer server) {
-        if (!CarpetASAdditionSettings.fakePlayerNametag) {
-            return Collections.emptySet();
-        }
+    private static FakePlayerSyncPayload buildPayload(MinecraftServer server) {
+        boolean head = CarpetASAdditionSettings.fakePlayerNametagHead;
+        boolean tab = CarpetASAdditionSettings.fakePlayerNametagTab;
+        boolean command = CarpetASAdditionSettings.fakePlayerNametagCommand;
+        Set<UUID> uuids = (head || tab || command) ? collectFakePlayerUuids(server) : Collections.emptySet();
+        return new FakePlayerSyncPayload(uuids, head, tab, command);
+    }
+
+    private static Set<UUID> collectFakePlayerUuids(MinecraftServer server) {
         return server.getPlayerList().getPlayers().stream()
                 .filter(p -> p instanceof EntityPlayerMPFake)
                 .map(Entity::getUUID)

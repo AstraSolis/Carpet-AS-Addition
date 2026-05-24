@@ -75,7 +75,7 @@ public abstract class PlayerTabOverlayMixin {
             )
     )
     private Component captureAndGetNameForDisplay(PlayerTabOverlay self, PlayerInfo playerInfo) {
-        fakePlayerTabFlags.add(FakePlayerCache.isFakePlayer(playerInfo.getProfile().id()));
+        fakePlayerTabFlags.add(FakePlayerCache.isTabEnabled() && FakePlayerCache.isFakePlayer(playerInfo.getProfile().id()));
         return self.getNameForDisplay(playerInfo);
     }
 

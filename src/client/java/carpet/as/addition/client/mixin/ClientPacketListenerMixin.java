@@ -35,6 +35,6 @@ public abstract class ClientPacketListenerMixin {
     private void onPlayerInfoRemove(ClientboundPlayerInfoRemovePacket packet, CallbackInfo ci) {
         Set<UUID> updated = new HashSet<>(FakePlayerCache.getAll());
         packet.profileIds().forEach(updated::remove);
-        FakePlayerCache.update(updated);
+        FakePlayerCache.updateUuids(updated);
     }
 }

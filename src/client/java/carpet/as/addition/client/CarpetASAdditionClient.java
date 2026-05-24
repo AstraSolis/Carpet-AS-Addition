@@ -17,14 +17,17 @@ public class CarpetASAdditionClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		ClientPlayNetworking.registerGlobalReceiver(
 				FakePlayerSyncPayload.TYPE,
-				(payload, context) -> context.client().execute(
-						() -> FakePlayerCache.update(payload.fakePlayerUuids())
-				)
+				(payload, context) -> context.client().execute(() -> FakePlayerCache.update(
+						payload.fakePlayerUuids(),
+						payload.headEnabled(),
+						payload.tabEnabled(),
+						payload.commandEnabled()
+				))
 		);
 
 		// 断开连接时立即清空假人缓存，防止残留 UUID 在下一个服务器上误判真实玩家
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) ->
-				FakePlayerCache.update(Collections.emptySet())
+				FakePlayerCache.update(Collections.emptySet(), false, false, false)
 		);
 	}
 }
