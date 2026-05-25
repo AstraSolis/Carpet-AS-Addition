@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.Slice;
 public abstract class CommandSuggestionsMixin {
 
     /**
-     * 拦截建议行背景 fill，对假人名称的建议行应用绿色背景。
+     * 拦截建议行背景 fill，对假人名称的建议行应用配置的背景色。
      *
      * <p>MC 1.21.x SuggestionsList.render 中，建议行渲染顺序为：
      * <ol>
@@ -54,8 +54,9 @@ public abstract class CommandSuggestionsMixin {
             GuiGraphics guiGraphics, int x1, int y1, int x2, int y2, int color,
             @Local(name = "suggestion") Suggestion suggestion
     ) {
-        if (FakePlayerCache.isCommandEnabled() && FakePlayerCache.isFakePlayerByName(suggestion.getText())) {
-            guiGraphics.fill(x1, y1, x2, y2, FakePlayerCache.NAMETAG_BG_COLOR);
+        int commandColor = FakePlayerCache.getCommandColor();
+        if (commandColor != -1 && FakePlayerCache.isFakePlayerByName(suggestion.getText())) {
+            guiGraphics.fill(x1, y1, x2, y2, commandColor);
             return;
         }
         guiGraphics.fill(x1, y1, x2, y2, color);

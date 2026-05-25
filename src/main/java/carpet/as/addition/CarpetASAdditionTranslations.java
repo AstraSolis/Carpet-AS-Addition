@@ -13,14 +13,36 @@ public final class CarpetASAdditionTranslations {
 	/** 本 mod 专用分类，对应 {@link CarpetASAdditionSettings#CATEGORY} */
 	public static final String CATEGORY_AS_ADDITION = "carpet.category.as_addition";
 
-	/** 规则 {@code fakePlayerNametag} 的翻译键前缀 */
-	public static final class FakePlayerNametag {
-		public static final String NAME = "carpet.rule.fakePlayerNametag.name";
-		public static final String DESC = "carpet.rule.fakePlayerNametag.desc";
-		public static final String EXTRA_0 = "carpet.rule.fakePlayerNametag.extra.0";
-		public static final String EXTRA_1 = "carpet.rule.fakePlayerNametag.extra.1";
+	/** 规则 {@code fakePlayerNametagHead} 的翻译键前缀 */
+	public static final class FakePlayerNametagHead {
+		public static final String NAME = "carpet.rule.fakePlayerNametagHead.name";
+		public static final String DESC = "carpet.rule.fakePlayerNametagHead.desc";
+		public static final String EXTRA_0 = "carpet.rule.fakePlayerNametagHead.extra.0";
+		public static final String EXTRA_1 = "carpet.rule.fakePlayerNametagHead.extra.1";
 
-		private FakePlayerNametag() {
+		private FakePlayerNametagHead() {
+		}
+	}
+
+	/** 规则 {@code fakePlayerNametagTab} 的翻译键前缀 */
+	public static final class FakePlayerNametagTab {
+		public static final String NAME = "carpet.rule.fakePlayerNametagTab.name";
+		public static final String DESC = "carpet.rule.fakePlayerNametagTab.desc";
+		public static final String EXTRA_0 = "carpet.rule.fakePlayerNametagTab.extra.0";
+		public static final String EXTRA_1 = "carpet.rule.fakePlayerNametagTab.extra.1";
+
+		private FakePlayerNametagTab() {
+		}
+	}
+
+	/** 规则 {@code fakePlayerNametagCommand} 的翻译键前缀 */
+	public static final class FakePlayerNametagCommand {
+		public static final String NAME = "carpet.rule.fakePlayerNametagCommand.name";
+		public static final String DESC = "carpet.rule.fakePlayerNametagCommand.desc";
+		public static final String EXTRA_0 = "carpet.rule.fakePlayerNametagCommand.extra.0";
+		public static final String EXTRA_1 = "carpet.rule.fakePlayerNametagCommand.extra.1";
+
+		private FakePlayerNametagCommand() {
 		}
 	}
 

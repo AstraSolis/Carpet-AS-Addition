@@ -18,25 +18,28 @@ public class CarpetASAdditionSettings {
 	public static final String CATEGORY = "as_addition";
 
 	/**
-	 * 假人头顶名称标签背景颜色标记：开启后假人头顶名称标签背景变为绿色，与正常玩家区分。
-	 * 客户端需同时安装本模组才能看到效果。
+	 * 假人头顶名称标签背景颜色：设为颜色名后假人头顶名称标签背景变为对应颜色，与正常玩家区分。
+	 * 设为 false 表示关闭。客户端需同时安装本模组才能看到效果。
+	 * 可选颜色见 {@link NametagColor}。
 	 */
-	@Rule(categories = {CATEGORY})
-	public static boolean fakePlayerNametagHead = false;
+	@Rule(options = {"false", "green", "red", "blue", "yellow", "orange", "purple", "white", "aqua"}, categories = {CATEGORY})
+	public static String fakePlayerNametagHead = "false";
 
 	/**
-	 * 假人 Tab 玩家列表行背景颜色标记：开启后 Tab 列表中假人所在行背景变为绿色，与正常玩家区分。
-	 * 客户端需同时安装本模组才能看到效果。
+	 * 假人 Tab 玩家列表行背景颜色：设为颜色名后 Tab 列表中假人所在行背景变为对应颜色，与正常玩家区分。
+	 * 设为 false 表示关闭。客户端需同时安装本模组才能看到效果。
+	 * 可选颜色见 {@link NametagColor}。
 	 */
-	@Rule(categories = {CATEGORY})
-	public static boolean fakePlayerNametagTab = false;
+	@Rule(options = {"false", "green", "red", "blue", "yellow", "orange", "purple", "white", "aqua"}, categories = {CATEGORY})
+	public static String fakePlayerNametagTab = "false";
 
 	/**
-	 * 假人命令补全建议行背景颜色标记：开启后命令补全列表中假人名称的行背景变为绿色，与正常玩家区分。
-	 * 客户端需同时安装本模组才能看到效果。
+	 * 假人命令补全建议行背景颜色：设为颜色名后命令补全列表中假人名称的行背景变为对应颜色，与正常玩家区分。
+	 * 设为 false 表示关闭。客户端需同时安装本模组才能看到效果。
+	 * 可选颜色见 {@link NametagColor}。
 	 */
-	@Rule(categories = {CATEGORY})
-	public static boolean fakePlayerNametagCommand = false;
+	@Rule(options = {"false", "green", "red", "blue", "yellow", "orange", "purple", "white", "aqua"}, categories = {CATEGORY})
+	public static String fakePlayerNametagCommand = "false";
 
 	/**
 	 * 假人睡眠忽略：开启后服务端在判断"是否所有玩家都已入睡以跳过夜晚"时忽略假人，

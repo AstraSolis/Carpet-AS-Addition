@@ -2,17 +2,17 @@
   "carpet.category.as_addition": "AS的附加包",
 
   "carpet.rule.fakePlayerNametagHead.name": "假人名称标签颜色（头顶）",
-  "carpet.rule.fakePlayerNametagHead.desc": "开启后，假人头顶的名称标签背景变为绿色，与正常玩家的深色背景区分，不改变名称文本内容。",
+  "carpet.rule.fakePlayerNametagHead.desc": "设为颜色名后，假人头顶的名称标签背景变为指定颜色，与正常玩家的深色背景区分，不改变名称文本内容。设为 false 表示关闭。",
   "carpet.rule.fakePlayerNametagHead.extra.0": "客户端需同时安装本模组才能看到颜色变化。",
   "carpet.rule.fakePlayerNametagHead.extra.1": "规则切换后立即对已在线的玩家生效。",
 
   "carpet.rule.fakePlayerNametagTab.name": "假人名称标签颜色（Tab栏）",
-  "carpet.rule.fakePlayerNametagTab.desc": "开启后，Tab 玩家列表中假人所在行的背景变为绿色，与正常玩家的深色背景区分，不改变名称文本内容。",
+  "carpet.rule.fakePlayerNametagTab.desc": "设为颜色名后，Tab 玩家列表中假人所在行的背景变为指定颜色，与正常玩家的深色背景区分，不改变名称文本内容。设为 false 表示关闭。",
   "carpet.rule.fakePlayerNametagTab.extra.0": "客户端需同时安装本模组才能看到颜色变化。",
   "carpet.rule.fakePlayerNametagTab.extra.1": "规则切换后立即对已在线的玩家生效。",
 
   "carpet.rule.fakePlayerNametagCommand.name": "假人名称标签颜色（命令补全）",
-  "carpet.rule.fakePlayerNametagCommand.desc": "开启后，命令补全建议列表中假人名称所在行的背景变为绿色，与正常玩家的深色背景区分，不改变名称文本内容。",
+  "carpet.rule.fakePlayerNametagCommand.desc": "设为颜色名后，命令补全建议列表中假人名称所在行的背景变为指定颜色，与正常玩家的深色背景区分，不改变名称文本内容。设为 false 表示关闭。",
   "carpet.rule.fakePlayerNametagCommand.extra.0": "客户端需同时安装本模组才能看到颜色变化。",
   "carpet.rule.fakePlayerNametagCommand.extra.1": "规则切换后立即对已在线的玩家生效。",
 

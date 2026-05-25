@@ -29,7 +29,7 @@ import java.util.List;
  *   <li>在 render 的第一个 for-each 循环中，通过拦截 {@code getNameForDisplay} 调用，
  *       按 list 顺序收集各玩家是否为假人的标记。</li>
  *   <li>在 render 的第二个 for 循环中，通过拦截 {@code GuiGraphics.fill} 调用，
- *       按序消费标记列表，对假人行应用绿色背景。</li>
+ *       按序消费标记列表，对假人行应用配置的背景色。</li>
  * </ol>
  *
  * <p>使用 {@code @Slice} 将第二步的 fill 拦截限定在 {@code getBackgroundColor} 调用之后，
@@ -40,9 +40,6 @@ import java.util.List;
 @Environment(EnvType.CLIENT)
 @Mixin(PlayerTabOverlay.class)
 public abstract class PlayerTabOverlayMixin {
-
-    @Unique
-    private static final int FAKE_PLAYER_TAB_BG_COLOR = FakePlayerCache.NAMETAG_BG_COLOR;
 
     /**
      * 按渲染顺序记录每个玩家是否为假人，在每次 render 开始时重置。
@@ -75,12 +72,13 @@ public abstract class PlayerTabOverlayMixin {
             )
     )
     private Component captureAndGetNameForDisplay(PlayerTabOverlay self, PlayerInfo playerInfo) {
-        fakePlayerTabFlags.add(FakePlayerCache.isTabEnabled() && FakePlayerCache.isFakePlayer(playerInfo.getProfile().id()));
+        int tabColor = FakePlayerCache.getTabColor();
+        fakePlayerTabFlags.add(tabColor != -1 && FakePlayerCache.isFakePlayer(playerInfo.getProfile().id()));
         return self.getNameForDisplay(playerInfo);
     }
 
     /**
-     * 拦截 render 内 getBackgroundColor 调用之后的所有 fill 调用，对假人行替换绿色背景。
+     * 拦截 render 内 getBackgroundColor 调用之后的所有 fill 调用，对假人行替换配置的背景色。
      *
      * <p>{@code @Slice} 确保此 redirect 仅作用于玩家行 fill 与 footer fill，
      * 自动排除 header fill 和 backdrop fill（两者均在 getBackgroundColor 之前）。
@@ -107,7 +105,7 @@ public abstract class PlayerTabOverlayMixin {
         boolean hasFlagForRow = fakePlayerRowIndex < fakePlayerTabFlags.size();
         if (hasFlagForRow) {
             boolean isFake = fakePlayerTabFlags.get(fakePlayerRowIndex++);
-            guiGraphics.fill(x1, y1, x2, y2, isFake ? FAKE_PLAYER_TAB_BG_COLOR : color);
+            guiGraphics.fill(x1, y1, x2, y2, isFake ? FakePlayerCache.getTabColor() : color);
         } else {
             guiGraphics.fill(x1, y1, x2, y2, color);
         }

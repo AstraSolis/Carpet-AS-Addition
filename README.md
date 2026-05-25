@@ -30,11 +30,13 @@
 
 以下三个规则独立控制各 UI 位置的假人高亮，均默认关闭。**客户端需同时安装本模组才能看到颜色变化。**
 
+可选颜色：`green`、`red`、`blue`、`yellow`、`orange`、`purple`、`white`、`aqua`；设为 `false` 表示关闭。
+
 | 规则 | 默认 | 说明 |
 |------|------|------|
-| `fakePlayerNametagHead` | 关闭 | 开启后，假人头顶名称标签背景变为绿色，与真实玩家的深色背景区分 |
-| `fakePlayerNametagTab` | 关闭 | 开启后，Tab 玩家列表中假人所在行背景变为绿色 |
-| `fakePlayerNametagCommand` | 关闭 | 开启后，命令补全建议列表中假人名称所在行背景变为绿色 |
+| `fakePlayerNametagHead` | `false` | 设为颜色名后，假人头顶名称标签背景变为指定颜色，与真实玩家的深色背景区分 |
+| `fakePlayerNametagTab` | `false` | 设为颜色名后，Tab 玩家列表中假人所在行背景变为指定颜色 |
+| `fakePlayerNametagCommand` | `false` | 设为颜色名后，命令补全建议列表中假人名称所在行背景变为指定颜色 |
 
 ### 假人睡眠忽略
 

@@ -1,6 +1,7 @@
 package carpet.as.addition.fakeplayer;
 
 import carpet.as.addition.CarpetASAdditionSettings;
+import carpet.as.addition.NametagColor;
 import carpet.as.addition.network.FakePlayerSyncPayload;
 import carpet.patches.EntityPlayerMPFake;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -78,11 +79,12 @@ public final class FakePlayerTracker {
     }
 
     private static FakePlayerSyncPayload buildPayload(MinecraftServer server) {
-        boolean head = CarpetASAdditionSettings.fakePlayerNametagHead;
-        boolean tab = CarpetASAdditionSettings.fakePlayerNametagTab;
-        boolean command = CarpetASAdditionSettings.fakePlayerNametagCommand;
-        Set<UUID> uuids = (head || tab || command) ? collectFakePlayerUuids(server) : Collections.emptySet();
-        return new FakePlayerSyncPayload(uuids, head, tab, command);
+        int headColor = NametagColor.resolve(CarpetASAdditionSettings.fakePlayerNametagHead);
+        int tabColor = NametagColor.resolve(CarpetASAdditionSettings.fakePlayerNametagTab);
+        int commandColor = NametagColor.resolve(CarpetASAdditionSettings.fakePlayerNametagCommand);
+        boolean anyEnabled = headColor != -1 || tabColor != -1 || commandColor != -1;
+        Set<UUID> uuids = anyEnabled ? collectFakePlayerUuids(server) : Collections.emptySet();
+        return new FakePlayerSyncPayload(uuids, headColor, tabColor, commandColor);
     }
 
     private static Set<UUID> collectFakePlayerUuids(MinecraftServer server) {

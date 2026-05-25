@@ -12,20 +12,20 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * 服务端 → 客户端同步包：传递当前所有假人的 UUID 集合及各 UI 位置的启用状态。
+ * 服务端 → 客户端同步包：传递当前所有假人的 UUID 集合及各 UI 位置的颜色配置。
  * 服务端在任意子规则开启时发送完整集合，全部关闭时发送空集合。
  *
  * @param fakePlayerUuids 当前在线假人的 UUID 集合；全部规则关闭时为空集合
- * @param headEnabled     是否对头顶名称标签启用颜色标记
- * @param tabEnabled      是否对 Tab 玩家列表启用颜色标记
- * @param commandEnabled  是否对命令补全建议行启用颜色标记
+ * @param headColor       头顶名称标签背景色 ARGB 值；-1 表示该位置未启用
+ * @param tabColor        Tab 玩家列表行背景色 ARGB 值；-1 表示该位置未启用
+ * @param commandColor    命令补全建议行背景色 ARGB 值；-1 表示该位置未启用
  */
 @NullMarked
 public record FakePlayerSyncPayload(
         Set<UUID> fakePlayerUuids,
-        boolean headEnabled,
-        boolean tabEnabled,
-        boolean commandEnabled
+        int headColor,
+        int tabColor,
+        int commandColor
 ) implements CustomPacketPayload {
 
     public static final CustomPacketPayload.Type<FakePlayerSyncPayload> TYPE =
@@ -38,9 +38,9 @@ public record FakePlayerSyncPayload(
                         for (UUID uuid : value.fakePlayerUuids()) {
                             buf.writeUUID(uuid);
                         }
-                        buf.writeBoolean(value.headEnabled());
-                        buf.writeBoolean(value.tabEnabled());
-                        buf.writeBoolean(value.commandEnabled());
+                        buf.writeInt(value.headColor());
+                        buf.writeInt(value.tabColor());
+                        buf.writeInt(value.commandColor());
                     },
                     buf -> {
                         int size = buf.readVarInt();
@@ -48,9 +48,9 @@ public record FakePlayerSyncPayload(
                         for (int i = 0; i < size; i++) {
                             uuids.add(buf.readUUID());
                         }
-                        boolean head = buf.readBoolean();
-                        boolean tab = buf.readBoolean();
-                        boolean command = buf.readBoolean();
+                        int head = buf.readInt();
+                        int tab = buf.readInt();
+                        int command = buf.readInt();
                         return new FakePlayerSyncPayload(uuids, head, tab, command);
                     }
             );
