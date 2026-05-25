@@ -15,6 +15,7 @@ public class CarpetASAdditionClient implements ClientModInitializer {
 	@Override
 	@SuppressWarnings("resource")
 	public void onInitializeClient() {
+		//? if >=1.20.5 {
 		ClientPlayNetworking.registerGlobalReceiver(
 				FakePlayerSyncPayload.TYPE,
 				(payload, context) -> context.client().execute(() -> FakePlayerCache.update(
@@ -24,6 +25,18 @@ public class CarpetASAdditionClient implements ClientModInitializer {
 						payload.commandColor()
 				))
 		);
+		//?} else {
+		/*// 1.20.1 PlayPacketHandler 签名为 (packet, player, responseSender)，在渲染线程上调用，无需 execute()
+		ClientPlayNetworking.registerGlobalReceiver(
+				FakePlayerSyncPayload.TYPE,
+				(payload, player, responseSender) -> FakePlayerCache.update(
+						payload.fakePlayerUuids(),
+						payload.headColor(),
+						payload.tabColor(),
+						payload.commandColor()
+				)
+		);
+		*///?}
 
 		// 断开连接时立即清空假人缓存，防止残留 UUID 在下一个服务器上误判真实玩家
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) ->

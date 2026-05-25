@@ -91,8 +91,13 @@ public final class FakePlayerCache {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) return Collections.emptySet();
         return mc.player.connection.getOnlinePlayers().stream()
+                //? if >=1.21 {
                 .filter(info -> uuids.contains(info.getProfile().id()))
                 .map(info -> info.getProfile().name())
+                //?} else {
+                /*.filter(info -> uuids.contains(info.getProfile().getId()))
+                .map(info -> info.getProfile().getName())
+                *///?}
                 .collect(Collectors.toUnmodifiableSet());
     }
 

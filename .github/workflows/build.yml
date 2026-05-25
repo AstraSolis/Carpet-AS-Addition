@@ -1,7 +1,5 @@
-# Automatically build the project and run any configured tests for every push
-# and submitted pull request. This can help catch issues that only occur on
-# certain platforms or Java versions, and provides a first line of defence
-# against bad commits.
+# 每次 push / PR 构建 settings.gradle.kts 中注册的全部 Stonecutter 目标版本
+# 各版本通过 Gradle Java Toolchain 自动解析所需 JDK
 
 name: build
 on: [pull_request, push]
@@ -12,22 +10,33 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
+
       - name: validate gradle wrapper
         uses: gradle/actions/wrapper-validation@v6
+
       - name: setup jdk
         uses: actions/setup-java@v5
         with:
           java-version: '21'
-          distribution: 'microsoft'
+          distribution: 'temurin'
+
+      - name: setup gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
-      - name: build
-        run: ./gradlew build
+
+      - name: build all versions
+        run: ./gradlew build buildAndCollect --no-daemon
+
       - name: set artifact variables
         run: echo "SHORT_SHA=${GITHUB_SHA:0:7}" >> "$GITHUB_ENV"
         shell: bash
+
       - name: capture build artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: Carpet-AS-Addition+${{ env.SHORT_SHA }}
-          path: build/libs/
+          name: carpet-as-addition-${{ env.SHORT_SHA }}
+          path: |
+            build/libs/**/carpet-as-addition-*.jar
+            !build/libs/**/*-sources.jar

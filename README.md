@@ -2,18 +2,26 @@
 
 [Carpet mod](https://modrinth.com/mod/carpet) 的附属模组，为carpet提供额外可配置规则。在默认设置下**不会改变原版行为**。
 
+## 支持版本
+
+| Minecraft 版本 | Carpet 版本 | Java |
+|----------------|------------|------|
+| 1.20.1 | 1.4.112 | 17+ |
+| 1.21.11 | 1.4.194 | 21+ |
+| 26.1 | 26.1+v260401 | 25+ |
+
 ## 依赖
 
 | 模组 | 说明 |
 |------|------|
 | [Fabric Loader](https://fabricmc.net/) | 0.19.2 及以上 |
-| [Fabric API](https://modrinth.com/mod/fabric-api) | 与 1.21.11 匹配的版本 |
-| [Carpet](https://modrinth.com/mod/carpet) | 1.4.194（1.21.11）或兼容版本 |
+| [Fabric API](https://modrinth.com/mod/fabric-api) | 与对应 MC 版本匹配的版本 |
+| [Carpet](https://modrinth.com/mod/carpet) | 与对应 MC 版本匹配的版本 |
 
 ## 安装
 
-1. 安装 Fabric 
-2. 将 **Fabric API**、**Carpet** 与本模组 JAR 放入 `mods` 文件夹
+1. 安装对应版本的 [Fabric Loader](https://fabricmc.net/)（需 0.19.2+）
+2. 将 [Fabric API](https://modrinth.com/mod/fabric-api)、[Carpet](https://modrinth.com/mod/carpet) 与本模组 JAR 放入 `mods` 文件夹
 3. 启动游戏
 
 ## 使用方法

@@ -3,7 +3,11 @@ package carpet.as.addition.client.mixin;
 import carpet.as.addition.client.fakeplayer.FakePlayerCache;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+//? if >=26.1 {
+/*import net.minecraft.client.gui.GuiGraphicsExtractor;
+*///?} else {
 import net.minecraft.client.gui.GuiGraphics;
+//?}
 import net.minecraft.client.gui.components.PlayerTabOverlay;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.network.chat.Component;
@@ -53,9 +57,18 @@ public abstract class PlayerTabOverlayMixin {
     @Unique
     private int fakePlayerRowIndex = 0;
 
+    //? if >=26.1 {
+    /*@Inject(method = "extractRenderState", at = @At("HEAD"))
+    *///?} else {
     @Inject(method = "render", at = @At("HEAD"))
+    //?}
     private void onRenderHead(
-            GuiGraphics guiGraphics, int screenWidth, Scoreboard scoreboard,
+            //? if >=26.1 {
+            /*GuiGraphicsExtractor guiGraphics,
+            *///?} else {
+            GuiGraphics guiGraphics,
+            //?}
+            int screenWidth, Scoreboard scoreboard,
             @Nullable Objective objective, CallbackInfo ci) {
         fakePlayerTabFlags.clear();
         fakePlayerRowIndex = 0;
@@ -65,7 +78,11 @@ public abstract class PlayerTabOverlayMixin {
      * 拦截 render 内对 getNameForDisplay 的每次调用，按序收集假人状态。
      */
     @Redirect(
+            //? if >=26.1 {
+            /*method = "extractRenderState",
+            *///?} else {
             method = "render",
+            //?}
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/gui/components/PlayerTabOverlay;getNameForDisplay(Lnet/minecraft/client/multiplayer/PlayerInfo;)Lnet/minecraft/network/chat/Component;"
@@ -73,7 +90,11 @@ public abstract class PlayerTabOverlayMixin {
     )
     private Component captureAndGetNameForDisplay(PlayerTabOverlay self, PlayerInfo playerInfo) {
         int tabColor = FakePlayerCache.getTabColor();
+        //? if >=1.21 {
         fakePlayerTabFlags.add(tabColor != -1 && FakePlayerCache.isFakePlayer(playerInfo.getProfile().id()));
+        //?} else {
+        /*fakePlayerTabFlags.add(tabColor != -1 && FakePlayerCache.isFakePlayer(playerInfo.getProfile().getId()));
+        *///?}
         return self.getNameForDisplay(playerInfo);
     }
 
@@ -89,7 +110,11 @@ public abstract class PlayerTabOverlayMixin {
      * 越界时降级为原始颜色，不崩溃，下一帧自动恢复。
      */
     @Redirect(
+            //? if >=26.1 {
+            /*method = "extractRenderState",
+            *///?} else {
             method = "render",
+            //?}
             slice = @Slice(
                     from = @At(
                             value = "INVOKE",
@@ -98,10 +123,20 @@ public abstract class PlayerTabOverlayMixin {
             ),
             at = @At(
                     value = "INVOKE",
+                    //? if >=26.1 {
+                    /*target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;fill(IIIII)V"
+                    *///?} else {
                     target = "Lnet/minecraft/client/gui/GuiGraphics;fill(IIIII)V"
+                    //?}
             )
     )
-    private void redirectRowFill(GuiGraphics guiGraphics, int x1, int y1, int x2, int y2, int color) {
+    private void redirectRowFill(
+            //? if >=26.1 {
+            /*GuiGraphicsExtractor guiGraphics,
+            *///?} else {
+            GuiGraphics guiGraphics,
+            //?}
+            int x1, int y1, int x2, int y2, int color) {
         boolean hasFlagForRow = fakePlayerRowIndex < fakePlayerTabFlags.size();
         if (hasFlagForRow) {
             boolean isFake = fakePlayerTabFlags.get(fakePlayerRowIndex++);

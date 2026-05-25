@@ -1,0 +1,43 @@
+# 全局属性（所有版本共享）
+mod.id = "carpet-as-addition"
+mod.name = "Carpet AS Addition"
+mod.group = "carpet.as.addition"
+mod.version = "1.0.0"
+
+deps.fabric_loader = "0.19.2"
+loomx.loom_version = "1.16-SNAPSHOT"
+
+# ────────────────────────────────────
+# 1.20.1 专属属性
+# ────────────────────────────────────
+["1.20.1"]
+mod.mc_compat = ">=1.20 <=1.20.1"
+mod.java_min = ">=17"
+mod.mixin_java = "JAVA_17"
+
+deps.fabric_api = "0.92.9+1.20.1"
+deps.carpet = "1.4.112"
+
+# ────────────────────────────────────
+# 1.21.11 专属属性（当前开发版本）
+# ────────────────────────────────────
+["1.21.11"]
+mod.mc_compat = "~1.21.11"
+mod.java_min = ">=21"
+mod.mixin_java = "JAVA_21"
+
+deps.fabric_api = "0.141.4+1.21.11"
+deps.carpet = "1.4.194"
+
+# ────────────────────────────────────
+# 26.1 专属属性
+# Carpet 26.1
+# 格式与旧版本不同：carpet:fabric-carpet:26.1+v260401
+# ────────────────────────────────────
+["26.1"]
+mod.mc_compat = "~26.1"
+mod.java_min = ">=25"
+mod.mixin_java = "JAVA_25"
+
+deps.fabric_api = "0.149.1+26.1.2"
+deps.carpet = "26.1+v260401"

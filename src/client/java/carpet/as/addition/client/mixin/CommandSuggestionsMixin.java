@@ -5,7 +5,11 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.brigadier.suggestion.Suggestion;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+//? if >=26.1 {
+/*import net.minecraft.client.gui.GuiGraphicsExtractor;
+*///?} else {
 import net.minecraft.client.gui.GuiGraphics;
+//?}
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -37,7 +41,11 @@ public abstract class CommandSuggestionsMixin {
      * 此时 {@code suggestion} 始终在作用域内，可直接通过 {@code @Local} 捕获。
      */
     @Redirect(
+            //? if >=26.1 {
+            /*method = "extractRenderState",
+            *///?} else {
             method = "render",
+            //?}
             slice = @Slice(
                     from = @At(
                             value = "INVOKE",
@@ -47,11 +55,20 @@ public abstract class CommandSuggestionsMixin {
             ),
             at = @At(
                     value = "INVOKE",
+                    //? if >=26.1 {
+                    /*target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;fill(IIIII)V"
+                    *///?} else {
                     target = "Lnet/minecraft/client/gui/GuiGraphics;fill(IIIII)V"
+                    //?}
             )
     )
     private void redirectSuggestionFill(
-            GuiGraphics guiGraphics, int x1, int y1, int x2, int y2, int color,
+            //? if >=26.1 {
+            /*GuiGraphicsExtractor guiGraphics,
+            *///?} else {
+            GuiGraphics guiGraphics,
+            //?}
+            int x1, int y1, int x2, int y2, int color,
             @Local(name = "suggestion") Suggestion suggestion
     ) {
         int commandColor = FakePlayerCache.getCommandColor();
