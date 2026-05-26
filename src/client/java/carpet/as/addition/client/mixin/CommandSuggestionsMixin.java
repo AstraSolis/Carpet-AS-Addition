@@ -38,7 +38,8 @@ public abstract class CommandSuggestionsMixin {
      *   <li>{@code guiGraphics.fill(...)} — 绘制行背景</li>
      * </ol>
      * {@code @Slice(from = List.get() 首次调用)} 确保此 redirect 仅作用于 for 循环体内的 fill，
-     * 此时 {@code suggestion} 始终在作用域内，可直接通过 {@code @Local} 捕获。
+     * 此时 {@code suggestion} 始终在作用域内，通过 {@code @Local(ordinal = 0)} 按类型+序号捕获，
+     * 不依赖局部变量名调试信息，在生产环境字节码中同样可靠。
      */
     @Redirect(
             //? if >=26.1 {
@@ -69,7 +70,7 @@ public abstract class CommandSuggestionsMixin {
             GuiGraphics guiGraphics,
             //?}
             int x1, int y1, int x2, int y2, int color,
-            @Local(name = "suggestion") Suggestion suggestion
+            @Local(ordinal = 0) Suggestion suggestion
     ) {
         int commandColor = FakePlayerCache.getCommandColor();
         if (commandColor != -1 && FakePlayerCache.isFakePlayerByName(suggestion.getText())) {
