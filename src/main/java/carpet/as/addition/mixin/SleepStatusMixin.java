@@ -28,11 +28,12 @@ public abstract class SleepStatusMixin {
             argsOnly = true
     )
     private List<? extends Player> filterFakePlayersFromSleepCount(List<? extends Player> players) {
-        if (!CarpetASAdditionSettings.fakePlayerSleepIgnore) {
+        if (!CarpetASAdditionSettings.fakePlayerSleepIgnore || players.isEmpty()) {
             return players;
         }
-        return players.stream()
+        List<? extends Player> filtered = players.stream()
                 .filter(p -> !(p instanceof EntityPlayerMPFake))
                 .collect(Collectors.toCollection(ArrayList::new));
+        return filtered.size() == players.size() ? players : filtered;
     }
 }
