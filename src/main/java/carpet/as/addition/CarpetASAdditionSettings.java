@@ -22,7 +22,7 @@ public class CarpetASAdditionSettings {
 	 * 设为 false 表示关闭。客户端需同时安装本模组才能看到效果。
 	 * 可选颜色见 {@link NametagColor}。
 	 */
-	@Rule(options = {"false", "green", "red", "blue", "yellow", "orange", "purple", "white", "aqua"}, categories = {CATEGORY})
+	@Rule(options = {"false", "green", "red", "blue", "yellow", "orange", "purple", "white", "aqua"}, strict = true, categories = {CATEGORY})
 	public static String fakePlayerNametagHead = "false";
 
 	/**
@@ -30,7 +30,7 @@ public class CarpetASAdditionSettings {
 	 * 设为 false 表示关闭。客户端需同时安装本模组才能看到效果。
 	 * 可选颜色见 {@link NametagColor}。
 	 */
-	@Rule(options = {"false", "green", "red", "blue", "yellow", "orange", "purple", "white", "aqua"}, categories = {CATEGORY})
+	@Rule(options = {"false", "green", "red", "blue", "yellow", "orange", "purple", "white", "aqua"}, strict = true, categories = {CATEGORY})
 	public static String fakePlayerNametagTab = "false";
 
 	/**
@@ -38,7 +38,7 @@ public class CarpetASAdditionSettings {
 	 * 设为 false 表示关闭。客户端需同时安装本模组才能看到效果。
 	 * 可选颜色见 {@link NametagColor}。
 	 */
-	@Rule(options = {"false", "green", "red", "blue", "yellow", "orange", "purple", "white", "aqua"}, categories = {CATEGORY})
+	@Rule(options = {"false", "green", "red", "blue", "yellow", "orange", "purple", "white", "aqua"}, strict = true, categories = {CATEGORY})
 	public static String fakePlayerNametagCommand = "false";
 
 	/**

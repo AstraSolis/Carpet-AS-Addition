@@ -76,9 +76,9 @@ public class CarpetASAdditionExtension implements CarpetExtension {
 	@Override
 	public void onServerLoaded(MinecraftServer server) {
 		// 世界加载完成后向已在线玩家同步假人列表（任一子规则已开启且假人先于客户端重连时）
-		if (!"false".equals(CarpetASAdditionSettings.fakePlayerNametagHead)
-				|| !"false".equals(CarpetASAdditionSettings.fakePlayerNametagTab)
-				|| !"false".equals(CarpetASAdditionSettings.fakePlayerNametagCommand)) {
+		if (NametagColor.resolve(CarpetASAdditionSettings.fakePlayerNametagHead) != -1
+				|| NametagColor.resolve(CarpetASAdditionSettings.fakePlayerNametagTab) != -1
+				|| NametagColor.resolve(CarpetASAdditionSettings.fakePlayerNametagCommand) != -1) {
 			FakePlayerTracker.broadcastFakePlayerList(server);
 		}
 	}

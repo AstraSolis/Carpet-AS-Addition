@@ -29,11 +29,10 @@ public enum NametagColor {
      * @return 对应的 ARGB 整数；若值为 "false" 或无法识别则返回 -1（表示禁用）
      */
     public static int resolve(String value) {
-        for (NametagColor color : values()) {
-            if (color.name().equals(value)) {
-                return color.argb;
-            }
+        try {
+            return NametagColor.valueOf(value).argb;
+        } catch (IllegalArgumentException e) {
+            return -1;
         }
-        return -1;
     }
 }
