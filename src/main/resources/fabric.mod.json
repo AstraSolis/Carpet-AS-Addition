@@ -8,6 +8,12 @@
 		"AstraSolis"
 	],
 	"license": "MIT",
+	"icon": "assets/carpet-as-addition/icon.png",
+	"contact": {
+		"homepage": "https://github.com/AstraSolis/Carpet-AS-Addition",
+		"sources": "https://github.com/AstraSolis/Carpet-AS-Addition",
+		"issues": "https://github.com/AstraSolis/Carpet-AS-Addition/issues"
+	},
 	"environment": "*",
 	"entrypoints": {
 		"main": [
