@@ -1,6 +1,17 @@
 # Carpet AS Addition
 
+中文 | [English](README.en.md)
+
 [Carpet mod](https://modrinth.com/mod/carpet) 的附属模组，为carpet提供额外可配置规则。在默认设置下**不会改变原版行为**。
+
+## 简介
+
+本模组面向使用 Carpet 假人 与相关功能的服务端/单机玩家，补充两类能力：
+
+- **假人 UI 高亮**：在头顶名称标签、Tab 玩家列表、命令补全列表中，为假人名称行设置独立背景色，便于与真实玩家区分（需客户端同时安装本模组）。
+- **假人睡眠忽略**：服务端在判断「是否可跳过夜晚」时忽略假人，仅统计真实玩家（纯服务端规则，无需客户端模组）。
+
+规则通过 Carpet 标准机制注册，配置保存在世界的 `carpet.conf` 中，与 Carpet 本体共用同一文件。
 
 ## 支持版本
 
@@ -24,6 +35,8 @@
 2. 将 [Fabric API](https://modrinth.com/mod/fabric-api)、[Carpet](https://modrinth.com/mod/carpet) 与本模组 JAR 放入 `mods` 文件夹
 3. 启动游戏
 
+> JAR 文件名格式为 `carpet-as-addition-<模组版本>+<MC版本>.jar`，请按目标游戏版本选择对应构建。
+
 ## 使用方法
 
 1. 进入世界后执行 `/carpet`
@@ -42,15 +55,15 @@
 
 | 规则 | 默认 | 说明 |
 |------|------|------|
-| `fakePlayerNametagHead` | `false` | 设为颜色名后，假人头顶名称标签背景变为指定颜色，与真实玩家的深色背景区分 |
-| `fakePlayerNametagTab` | `false` | 设为颜色名后，Tab 玩家列表中假人所在行背景变为指定颜色 |
-| `fakePlayerNametagCommand` | `false` | 设为颜色名后，命令补全建议列表中假人名称所在行背景变为指定颜色 |
+| `fakePlayerNametagHead` | `false` | 假人头顶名称标签背景变为指定颜色 |
+| `fakePlayerNametagTab` | `false` | Tab 玩家列表中假人所在行背景变为指定颜色 |
+| `fakePlayerNametagCommand` | `false` | 命令补全列表中假人名称所在行背景变为指定颜色 |
 
 ### 假人睡眠忽略
 
 | 规则 | 默认 | 说明 |
 |------|------|------|
-| `fakePlayerSleepIgnore` | 关闭 | 开启后，服务端判断跳过夜晚时忽略所有假人，仅统计真实玩家。纯服务端规则，无需客户端安装本模组 |
+| `fakePlayerSleepIgnore` | 关闭 | 跳过夜晚时忽略所有假人，仅统计真实玩家；纯服务端规则，无需客户端安装本模组 |
 
 ## 问题反馈
 
